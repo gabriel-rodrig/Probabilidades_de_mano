@@ -12,6 +12,42 @@ ui <- fluidPage(
     "))
   ),
   
+  
+  #tags$style(HTML("
+  #    h1, h2, h3 { color: white; }
+  #    p, span, .shiny-text-output { color: #f0f0f0; }
+  #  ")),  
+  
+  #  tags$style(HTML("
+  #    .mainPanel label,
+  #    .mainPanel span,
+  #    .mainPanel .shiny-text-output {
+  #      color: black;
+  #    }
+  #  ")),
+  
+  tags$style(HTML("
+    /* Estilo para títulos generales */
+    h1, h2, h3 { color: white; }
+
+    /* Texto SOLO en el main panel */
+    .col-sm-8 p,
+    .col-sm-8 span,
+    .col-sm-8 .shiny-text-output,
+    .col-sm-8 label {
+      color: #f0f0f0;
+    }
+
+    /* Texto SOLO en el sidebar panel */
+    .col-sm-4 p,
+    .col-sm-4 span,
+    .col-sm-4 .shiny-text-output,
+    .col-sm-4 label {
+      color: black;
+    }
+")),
+  
+  
   titlePanel("Optimizador de manos iniciales"),
   
   sidebarLayout(
@@ -28,7 +64,7 @@ ui <- fluidPage(
       numericInput("exitos2", "Starters secundarios que querés ver mano", value = 0, min = 0),
       
       #### Input de handtraps
-      numericInput("handtraps", "Cantidad de handtraps que querés ver en mano", value = 1, min = 0),
+      numericInput("handtraps", "Cantidad de handtraps que querés ver en mano", value = 3, min = 0),
       
       #### Tamaño de mano
       checkboxInput("Turno1", "¿Mano yendo primero?", T),
@@ -36,10 +72,13 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      textOutput("introText"),
-      verbatimTextOutput("outputText"),
-      textOutput("resultado"),
+      tags$div(
+        textOutput("introText"),
+        style = "margin-bottom: 20px;"  # Espacio debajo del introText
+      ),
+      textOutput("resultado")
     )
+    
   )
 )
 
